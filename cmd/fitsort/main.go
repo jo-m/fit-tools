@@ -5,7 +5,7 @@
 // activity type and duration.
 // Example usage:
 //
-//	go run ./cmd/fitsort/ -in=~/Downloads/Garmin\ 2024-10/'
+//	go run ./cmd/fitsort/ -in=$HOME/Downloads/garmin-export/
 package main
 
 import (
@@ -95,7 +95,8 @@ func nameActivityFile(activity *filedef.Activity) (string, error) {
 	// 	distKM += float64(summary.TotalDistance) / 100 / 1000
 	// }
 
-	return fmt.Sprintf("%s %s %s", ts.Local().Format(time.RFC3339), sport, dur.Round(time.Minute)), nil
+	name := fmt.Sprintf("%s %s %s.fit", ts.Local().Format(time.RFC3339), sport, dur.Round(time.Minute))
+	return filepath.Join(ts.Format("2006"), name), nil
 }
 
 func copyFile(src, dst string) error {
@@ -145,14 +146,15 @@ func main() {
 			return nil
 		}
 
-		name, err := nameActivityFile(activity)
+		newPath, err := nameActivityFile(activity)
 		if err != nil {
 			log.Printf("failed to name '%s': %s", path, err)
 			return nil
 		}
 
-		fileName := filepath.Join(*outDir, fmt.Sprintf("%s.fit", name))
-		return copyFile(path, fileName)
+		newPath = filepath.Join(*outDir, newPath)
+		os.MkdirAll(filepath.Dir(newPath), 0755)
+		return copyFile(path, newPath)
 	})
 	if err != nil {
 		panic(err)
