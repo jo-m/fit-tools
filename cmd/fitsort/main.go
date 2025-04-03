@@ -3,6 +3,9 @@
 // Walks a directory, parses all .fit files in it, and moves all the ones which are
 // activities to a separate directory, with the file name containing timestamp,
 // activity type and duration.
+// Useful to sort your .fit files exported e.g. from Garmin Connect
+// before importing them onto another platform/service.
+//
 // Example usage:
 //
 //	go run ./cmd/fitsort/ -in=$HOME/Downloads/garmin-export/
