@@ -8,7 +8,7 @@
 //
 // Example usage:
 //
-//	go run ./cmd/fitsort/ -in=$HOME/Downloads/garmin-export/
+//	go run ./fitsort/ -in=$HOME/Downloads/garmin-export/
 package main
 
 import (
