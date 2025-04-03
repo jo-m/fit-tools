@@ -1,4 +1,4 @@
-module github.com/jo-m/fitsort
+module github.com/jo-m/fit-tools
 
 go 1.23.2
 
