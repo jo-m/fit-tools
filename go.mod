@@ -1,4 +1,4 @@
-module github.com/jo-m/fit-tools
+module jo-m.ch/go/fit-tools
 
 go 1.23.2
 
