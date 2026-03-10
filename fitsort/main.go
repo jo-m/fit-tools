@@ -91,13 +91,6 @@ func nameActivityFile(activity *filedef.Activity) (string, error) {
 	ts := activity.Activity.Timestamp
 	dur := time.Duration(activity.Activity.TotalTimerTime) * time.Millisecond
 
-	// // TODO: What to do for files where this results in 0?
-	// // activity.Splits[].TotalDistance also does not work.
-	// distKM := 0.
-	// for _, summary := range activity.SplitSummaries {
-	// 	distKM += float64(summary.TotalDistance) / 100 / 1000
-	// }
-
 	name := fmt.Sprintf("%s %s %s.fit", ts.Local().Format(time.RFC3339), sport, dur.Round(time.Minute))
 	return filepath.Join(ts.Format("2006"), name), nil
 }
